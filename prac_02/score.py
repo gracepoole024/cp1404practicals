@@ -15,7 +15,7 @@ def main():
     determine_grade(score)
 
 
-def determine_grade(score: float):
+def determine_grade(score):
     """Determine status of given score"""
     if score < 0 or score > 100:
         print("Invalid score")
