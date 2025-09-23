@@ -8,7 +8,7 @@ Q - Quit"""
 
 
 def main():
-   """Program for temperature conversion"""
+    """Program for temperature conversion"""
     print(MENU)
     choice = input(">>> ").upper()
     while choice != "Q":
