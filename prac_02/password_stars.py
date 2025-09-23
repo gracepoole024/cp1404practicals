@@ -1,11 +1,25 @@
-"""Password with error checking
-prac_02"""
+"""Password with error checking prac_02"""
 
-get_password = str(input("Set Password: "))
-minimum_length = 5
+MINIMUM_LENGTH = 5
 
-while len(get_password) < minimum_length:
-    print(f"Password must be Longer that {minimum_length} characters")
-    get_password = str(input("Set Password: "))
 
-print("*" * len(get_password))
+def main():
+    password = get_name()
+
+    while len(password) < MINIMUM_LENGTH:
+        print(f"Password must be Longer that {MINIMUM_LENGTH} characters")
+        password = get_name()
+
+    print_star(password)
+
+
+def print_star(password: str):
+    print("*" * len(password))
+
+
+def get_name() -> str:
+    password = str(input("Set Password: "))
+    return password
+
+
+main()
