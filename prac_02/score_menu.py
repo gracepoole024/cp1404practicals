@@ -1,5 +1,5 @@
 """CP1404 - Practical 2
-Program to menu to get subject score"""
+Program to display menu to get subject score"""
 
 MENU = """(G)et a valid score
 (P)rint result
@@ -8,6 +8,8 @@ MENU = """(G)et a valid score
 
 
 def main():
+    """Program to display menu and determine score satus"""
+    score = int(input("Enter Score: "))
     print(MENU)
     choice = input(">").upper()
     while choice != "Q":
@@ -25,6 +27,7 @@ def main():
 
 
 def get_valid_result():
+    """Get valid result from user"""
     score = int(input("Enter Score: "))
     while score < 0 or score > 100:
         print("Invalid Score")
@@ -33,6 +36,7 @@ def get_valid_result():
 
 
 def print_result(score):
+    """Print status of given score"""
     if score < 0 or score > 100:
         print("Invalid score")
     elif score >= 90:
@@ -44,6 +48,7 @@ def print_result(score):
 
 
 def print_stars(score):
+    """Print number of stars based on score"""
     print("*" * score)
 
 
