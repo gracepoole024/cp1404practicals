@@ -14,11 +14,14 @@ MAX_DECREASE = 0.05  # 5%
 MIN_PRICE = 1.00
 MAX_PRICE = 100.0
 INITIAL_PRICE = 10.0
+FILENAME = "readfile"
 
 price = INITIAL_PRICE
 print(f"Starting price: ${price:,.2f}")
 
 number_of_days = 0
+
+out_file = open(FILENAME, 'w')
 
 while MIN_PRICE <= price <= MAX_PRICE:
     price_change = 0
