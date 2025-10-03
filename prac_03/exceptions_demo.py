@@ -1,5 +1,6 @@
 """
-CP1404/CP5632 - Practical
+CP1404/CP5632 - Practical 3
+Try except exercise
 """
 
 try:

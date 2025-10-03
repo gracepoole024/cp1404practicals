@@ -1,4 +1,6 @@
 """
+CP1401 Practical 3
+
 What did you see on line 1?
 What was the smallest number you could have seen, what was the largest?
 The smallest number possible is 5, and the largest is 20.
