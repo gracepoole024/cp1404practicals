@@ -18,18 +18,13 @@ def main():
         number_of_quick_picks = int(input("How many quick picks? "))
     for i in range(number_of_quick_picks):
         quick_pick = []
-        randomise_numbers(quick_pick)
-        print(" ".join(f"{number:2}" for number in quick_pick))
-
-
-def randomise_numbers(quick_pick):
-    """Choose set of random numbers according to CONSTANTS."""
-    for j in range(NUMBERS_ON_LINE):
-        number = randint(MIN_NUMBER, MAX_NUMBER)
-        while number in quick_pick:
+        for j in range(NUMBERS_ON_LINE):
             number = randint(MIN_NUMBER, MAX_NUMBER)
-        quick_pick.append(number)
-    quick_pick.sort()
+            while number in quick_pick:
+                number = randint(MIN_NUMBER, MAX_NUMBER)
+            quick_pick.append(number)
+        quick_pick.sort()
+        print(" ".join(f"{number:2}" for number in quick_pick))
 
 
 main()
