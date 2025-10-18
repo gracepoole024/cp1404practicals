@@ -10,13 +10,14 @@ Actual:    minutes
 """
 
 FILENAME = "wimbledon.csv"
-INDEX_COUNTRY = 1
 INDEX_CHAMPION = 2
+INDEX_CHAMPION_COUNTRY = 3
 
 
 def main():
     """Read data file and print details about Wimbledon champions and countries."""
     pass
+
 
 def load_wimbledon_records(filename):
     """Load Wibledon.csv as nested list"""
@@ -27,6 +28,14 @@ def load_wimbledon_records(filename):
             wimbledon_records.append(parts)
     return wimbledon_records
 
+
+def format_wimbledon_records(wimbledon_records):
+    champion_to_count = {}
+    countries = set()
+    for record in wimbledon_records:
+        countries.add[INDEX_CHAMPION_COUNTRY]
+        champion_to_count[record[INDEX_CHAMPION]] += 1
+    return champion_to_count, countries
 
 
 main()
