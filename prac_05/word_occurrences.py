@@ -6,7 +6,7 @@ Word Occurrences Program
 """
 Word Occurrences
 Estimate: 30 minutes
-Actual:   40 minutes
+Actual:   37 minutes
 """
 
 from operator import itemgetter
