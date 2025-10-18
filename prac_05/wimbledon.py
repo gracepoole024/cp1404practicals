@@ -1,12 +1,12 @@
 """
 CP1404/CP5632 Practical 5
-Wimbledon
+Wimbledon Program
 """
 
 """
 Emails
 Estimate: 40 minutes
-Actual:    minutes
+Actual:    43 minutes
 """
 
 FILENAME = "wimbledon.csv"
@@ -22,11 +22,12 @@ def main():
 
 
 def load_wimbledon_records(filename):
-    """Load Wibledon.csv as nested list."""
+    """Load Wimbledon.csv as nested list."""
+    wimbledon_records = []
     with open(filename, "r", encoding="utf-8-sig") as in_file:
-        wimbledon_records = []
+        in_file.readline()  # skip heading
         for line in in_file:
-            parts = line.strip.split(",")
+            parts = line.strip().split(",")
             wimbledon_records.append(parts)
     return wimbledon_records
 
@@ -36,17 +37,21 @@ def format_wimbledon_records(wimbledon_records):
     champion_to_count = {}
     countries = set()
     for record in wimbledon_records:
-        countries.add[INDEX_CHAMPION_COUNTRY]
-        champion_to_count[record[INDEX_CHAMPION]] += 1
+        countries.add(record[INDEX_CHAMPION_COUNTRY])
+        try:
+            champion_to_count[record[INDEX_CHAMPION]] += 1
+        except KeyError:
+            champion_to_count[record[
+                INDEX_CHAMPION]] = 1  # Avoid KeyError error when a champion has first win(Key doesn't exist yet)
     return champion_to_count, countries
 
 
 def display_wimbledon_results(champion_to_count, countries):
     """Display Wimbledon results."""
     print("Wimbledon Champions:")
-    for champion, count in champion_to_count:
-        print(f"{champion:{len(champion)}} {count}")
-    print(f"These {len(countries)} have won Wimbledon:")
+    for champion, count in champion_to_count.items():
+        print(champion, count)
+    print(f"\nThese {len(countries)} have won Wimbledon:")
     print(",".join(sorted(countries)))
 
 
