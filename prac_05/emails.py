@@ -2,12 +2,11 @@
 CP1404/CP5632 Practical 5
 Emails Program
 """
-from re import split
 
 """
 Emails
 Estimate: 30 minutes
-Actual:   40 minutes
+Actual:   33 minutes
 """
 
 
