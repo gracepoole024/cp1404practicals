@@ -1,4 +1,4 @@
-"""CP1404/CP5632 Practical - Programming class."""
+"""CP1404/CP5632 Practical - ProgrammingLanguage class."""
 
 """
 Estimated: 20 minutes
@@ -14,3 +14,9 @@ class ProgrammingLanguage:
         self.typing = typing
         self.reflection = reflection
         self.year = year
+
+    def is_dynamic(self):
+        """Determine if programming language is dynamic"""
+        return self.typing == "Dynamic"
+
+
