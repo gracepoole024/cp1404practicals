@@ -24,3 +24,12 @@ class Guitar:
     def __str__(self):
         """Return a string representation of a guitar."""
         return f"{self.name} ({self.get_age()}) : ${self.cost}"
+
+    def __lt__(self, other):
+        """Compare guitars by age"""
+        return self.get_age() < other.get_age()
+
+    def __repr__(self):
+        """Return a string representation of the guitars."""
+        return str(self)
+

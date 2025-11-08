@@ -11,6 +11,7 @@ def main():
             parts = line.strip().split(",")
             guitars.append(Guitar(parts[0], int(parts[1]), float(parts[2])))
 
+        guitars.sort(reverse=True)
         print("These are my guitars:")
         for i, guitar in enumerate(guitars, 1):
             vintage = "(vintage)" if guitar.is_vintage() else ""
