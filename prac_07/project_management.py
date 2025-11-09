@@ -3,10 +3,10 @@ CP1404 Practical 7 - Project Management Program
 Estimated time:3hrs
 Actual time:
 """
+from datetime import datetime
+from operator import attrgetter
 
 from prac_07.project import Project
-
-FILENAME = "projects.txt"
 
 MENU = """Menu:
 L - Load Projects
@@ -20,7 +20,8 @@ Q - Quit
 
 def main():
     """Interactive program to load and save projects to a text file."""
-    projects = read_projects_file(FILENAME)
+    filename = input("Enter filename: ")
+    projects = read_projects_file(filename)
     print(MENU)
     choice = input(">>").upper()
     while choice != "Q":
@@ -31,7 +32,7 @@ def main():
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
-            pass
+            filter_projects_by_date(projects)
         elif choice == "A":
             projects = add_new_project(projects)
         else:
@@ -51,6 +52,7 @@ def read_projects_file(filename):
 
 
 def display_projects(projects):
+    projects.sort(reverse=True)
     for project in projects:
         print(
             f"{project.name}, {project.start_date}, {project.priority}, {project.cost}, {project.completion_percentage}")
@@ -65,6 +67,22 @@ def add_new_project(projects):
     completion_percentage = float(input("Completion Percentage: "))
     projects.append(Project(name, start_date, priority, cost, completion_percentage))
     return projects
+
+
+def filter_projects_by_date(projects):
+    input_date = input("Show projects after date (dd/mm/yyyy): ")
+    filter_date = datetime.strptime(input_date, "%d/%m/%Y")
+
+    filtered_dates = []
+    for project in projects:
+        project_date = datetime.strptime(project.start_date, "%d/%m/%Y")
+        if project_date >= filter_date:
+            filtered_dates.append(project)
+
+    filtered_dates.sort(key=attrgetter('start_date'))
+
+    for project in filtered_dates:
+        print(project)
 
 
 if __name__ == '__main__':
