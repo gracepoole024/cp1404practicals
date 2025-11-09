@@ -40,7 +40,7 @@ def main():
         elif choice == "A":
             projects = add_new_project(projects)
         elif choice == "U":
-            pass
+            projects = update_project(projects)
         else:
             print("Invalid menu choice")
         print(MENU)
@@ -108,7 +108,22 @@ def filter_projects_by_date(projects):
 
 
 def update_project(projects):
-    pass
+    for i, project in enumerate(projects):
+        print(f"{i} {project.name}, start {project.start_date}, priority {project.priority}, estimate: {project.cost}, "
+              f"completion: {project.completion_percentage}%")
+
+    project_choice = int(input("Project choice:"))
+
+    for i, project in enumerate(projects):
+        if i == project_choice:
+            print(f"{project.name}, start {project.start_date}, priority {project.priority}, estimate: {project.cost}, "
+                  f"completion: {project.completion_percentage}%")
+            new_percentage = int(input("New Percentage: "))
+            new_priority = int(input("New Priority: "))
+            project.completion_percentage = new_percentage
+            project.priority = new_priority
+
+    return projects
 
 
 if __name__ == '__main__':
