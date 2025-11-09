@@ -24,15 +24,17 @@ Q - Quit
 def main():
     """Interactive program to load and save projects to a text file."""
     print("Welcome to Pythonic Project Management")
-    projects = read_projects_file(FILENAME)
+    projects = load_projects(FILENAME)
     print(f"Loaded {len(projects)} projects from {FILENAME}")
     print(MENU)
     choice = input(">>").upper()
     while choice != "Q":
         if choice == "L":
-            pass
+            filename = input("Enter filename to load: ")
+            projects = load_projects(filename)
+            print(f"Loaded {len(projects)} projects from {filename}")
         elif choice == "S":
-            pass
+            save_projects(FILENAME,projects)
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
@@ -47,7 +49,7 @@ def main():
         choice = input(">>").upper()
 
 
-def read_projects_file(filename):
+def load_projects(filename):
     projects = []
     with open(filename, "r") as in_file:
         in_file.readline()
@@ -58,13 +60,8 @@ def read_projects_file(filename):
 
 
 def display_projects(projects):
-    incomplete_projects = []
-    completed = []
-    for project in projects:
-        if project.is_complete():
-            incomplete_projects.append(project)
-        else:
-            completed.append(project)
+    incomplete_projects = [project for project in projects if not project.is_complete()]
+    completed_projects = [project for project in projects if project.is_complete()]
 
     print("Incomplete projects: ")
     incomplete_projects.sort()
@@ -74,8 +71,8 @@ def display_projects(projects):
             f"completion: {project.completion_percentage}%")
 
     print("Completed projects: ")
-    completed.sort()
-    for project in completed:
+    completed_projects.sort()
+    for project in completed_projects:
         print(f"{project.name}, start {project.start_date}, priority {project.priority}, estimate: {project.cost}, "
               f"completion: {project.completion_percentage}%")
 
@@ -119,11 +116,19 @@ def update_project(projects):
             print(f"{project.name}, start {project.start_date}, priority {project.priority}, estimate: {project.cost}, "
                   f"completion: {project.completion_percentage}%")
             new_percentage = int(input("New Percentage: "))
-            new_priority = int(input("New Priority: "))
-            project.completion_percentage = new_percentage
-            project.priority = new_priority
-
+            new_priority = input("New Priority: ")
+            if new_percentage != "":
+                project.completion_percentage = new_percentage
+            if new_priority != "":
+                project.priority = int(new_priority)
     return projects
+
+
+def save_projects(filename, projects):
+    with open(filename, 'w') as out_file:
+        for project in projects:
+            out_file.write(f"{project.name}, {project.start_date}, {project.priority}, {project.cost}, "
+                           f"{project.completion_percentage}")
 
 
 if __name__ == '__main__':
