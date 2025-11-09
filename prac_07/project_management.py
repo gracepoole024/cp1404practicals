@@ -8,20 +8,24 @@ from operator import attrgetter
 
 from prac_07.project import Project
 
+FILENAME = "projects.txt"
+
 MENU = """Menu:
 L - Load Projects
 S - Save Projects
 D - Display Projects
 F - Filter projects by date
 A - Add new project
+U - Update Projects
 Q - Quit
 """
 
 
 def main():
     """Interactive program to load and save projects to a text file."""
-    filename = input("Enter filename: ")
-    projects = read_projects_file(filename)
+    print("Welcome to Pythonic Project Management")
+    projects = read_projects_file(FILENAME)
+    print(f"Loaded {len(projects)} projects from {FILENAME}")
     print(MENU)
     choice = input(">>").upper()
     while choice != "Q":
@@ -35,6 +39,8 @@ def main():
             filter_projects_by_date(projects)
         elif choice == "A":
             projects = add_new_project(projects)
+        elif choice == "U":
+            pass
         else:
             print("Invalid menu choice")
         print(MENU)
@@ -52,10 +58,26 @@ def read_projects_file(filename):
 
 
 def display_projects(projects):
-    projects.sort(reverse=True)
+    incomplete_projects = []
+    completed = []
     for project in projects:
+        if project.completion_percentage != 100:
+            incomplete_projects.append(project)
+        else:
+            completed.append(project)
+
+    print("Incomplete projects: ")
+    incomplete_projects.sort()
+    for project in incomplete_projects:
         print(
-            f"{project.name}, {project.start_date}, {project.priority}, {project.cost}, {project.completion_percentage}")
+            f"{project.name}, start {project.start_date}, priority {project.priority}, estimate: {project.cost}, "
+            f"completion: {project.completion_percentage}%")
+
+    print("Completed projects: ")
+    completed.sort()
+    for project in completed:
+        print(f"{project.name}, start {project.start_date}, priority {project.priority}, estimate: {project.cost}, "
+              f"completion: {project.completion_percentage}%")
 
 
 def add_new_project(projects):
@@ -70,8 +92,8 @@ def add_new_project(projects):
 
 
 def filter_projects_by_date(projects):
-    input_date = input("Show projects after date (dd/mm/yyyy): ")
-    filter_date = datetime.strptime(input_date, "%d/%m/%Y")
+    date_string = input("Show projects after date (dd/mm/yyyy): ")
+    filter_date = datetime.strptime(date_string, "%d/%m/%Y")
 
     filtered_dates = []
     for project in projects:
@@ -83,6 +105,10 @@ def filter_projects_by_date(projects):
 
     for project in filtered_dates:
         print(project)
+
+
+def update_project(projects):
+    pass
 
 
 if __name__ == '__main__':
