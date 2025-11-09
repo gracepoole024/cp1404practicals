@@ -1,7 +1,7 @@
 """
 CP1404 Practical 7 - Project Management Program
 Estimated time:3hrs
-Actual time:
+Actual time: ~ 3hrs 45 min
 """
 from datetime import datetime
 from operator import attrgetter
@@ -34,7 +34,7 @@ def main():
             projects = load_projects(filename)
             print(f"Loaded {len(projects)} projects from {filename}")
         elif choice == "S":
-            save_projects(FILENAME,projects)
+            save_projects(FILENAME, projects)
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
@@ -50,6 +50,7 @@ def main():
 
 
 def load_projects(filename):
+    """Load projects from chosen file."""
     projects = []
     with open(filename, "r") as in_file:
         in_file.readline()
@@ -60,7 +61,10 @@ def load_projects(filename):
 
 
 def display_projects(projects):
-    incomplete_projects = [project for project in projects if not project.is_complete()]
+    """Display functions by completed and incompleted and priority status."""
+    # Split projects into two lists to avoid repeated print statement headings, compared to an if else statement.
+    incomplete_projects = [project for project in projects if
+                           not project.is_complete()]  # Use helper method to sort projects nested list using boolean
     completed_projects = [project for project in projects if project.is_complete()]
 
     print("Incomplete projects: ")
@@ -89,22 +93,24 @@ def add_new_project(projects):
 
 
 def filter_projects_by_date(projects):
+    """Filter projects to display specified dates."""
     date_string = input("Show projects after date (dd/mm/yyyy): ")
-    filter_date = datetime.strptime(date_string, "%d/%m/%Y")
+    filter_date = datetime.strptime(date_string, "%d/%m/%Y").date()
 
     filtered_dates = []
     for project in projects:
-        project_date = datetime.strptime(project.start_date, "%d/%m/%Y")
+        project_date = datetime.strptime(project.start_date, "%d/%m/%Y").date()
         if project_date >= filter_date:
             filtered_dates.append(project)
 
-    filtered_dates.sort(key=attrgetter('start_date'))
+    filtered_dates.sort(key=attrgetter('start_date'))  # ask about this???
 
     for project in filtered_dates:
         print(project)
 
 
 def update_project(projects):
+    """Update completion percentage or priority for a selected project."""
     for i, project in enumerate(projects):
         print(f"{i} {project.name}, start {project.start_date}, priority {project.priority}, estimate: {project.cost}, "
               f"completion: {project.completion_percentage}%")
@@ -125,6 +131,8 @@ def update_project(projects):
 
 
 def save_projects(filename, projects):
+    """Save projects to the file."""
+    # Ask about how the user can choose another file to save to
     with open(filename, 'w') as out_file:
         for project in projects:
             out_file.write(f"{project.name}, {project.start_date}, {project.priority}, {project.cost}, "
