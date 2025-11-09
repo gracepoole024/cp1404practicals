@@ -61,7 +61,7 @@ def display_projects(projects):
     incomplete_projects = []
     completed = []
     for project in projects:
-        if project.completion_percentage != 100:
+        if project.is_complete():
             incomplete_projects.append(project)
         else:
             completed.append(project)
@@ -83,9 +83,9 @@ def display_projects(projects):
 def add_new_project(projects):
     """Add a project by prompting user for project details."""
     name = input("Project Name: ")
-    start_date = input("Start Date: ")
+    start_date = input("Start Date (dd/mm/yy): ")
     priority = int(input("Priority: "))
-    cost = float(input("Estimated Cost: "))
+    cost = float(input("Estimated Cost: $"))
     completion_percentage = float(input("Completion Percentage: "))
     projects.append(Project(name, start_date, priority, cost, completion_percentage))
     return projects

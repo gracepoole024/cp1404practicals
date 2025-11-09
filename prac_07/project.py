@@ -23,3 +23,7 @@ class Project:
     def __repr__(self):
         """Return a string representation of the projects."""
         return str(self)
+
+    def is_complete(self):
+        """Determine if a project is complete"""
+        return self.completion_percentage == 100
