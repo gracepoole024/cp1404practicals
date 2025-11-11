@@ -31,6 +31,11 @@ class MilesKilometersApp(App):
         kilometers_result = miles_value * MILES_TO_KILOMETERS
         self.root.ids.output_label.text = str(kilometers_result)
 
+    def handle_increment(self):
+        miles_value = self.receive_miles() + 1
+        self.root.ids.input_miles.text = str(miles_value)
+        self.handle_calculate()
+
 
 # create and start the App running
 MilesKilometersApp().run()
