@@ -24,6 +24,13 @@ class MilesKilometersApp(App):
         miles_value = float(self.root.ids.input_miles.text)
         return miles_value
 
+    def handle_calculations(self):
+        """Handle changes to the text input by updating the model from the view."""
+        self.message = self.root.ids.user_input.text
+        miles_value = self.receive_miles()
+        kilometers_result = miles_value * MILES_TO_KILOMETERS
+        self.root.ids.output_label.text = str(kilometers_result)
+
 
 # create and start the App running
 MilesKilometersApp().run()
