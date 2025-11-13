@@ -21,6 +21,7 @@ class MilesKilometersApp(App):
         return self.root
 
     def receive_miles(self):
+        """Receive miles from user and return float."""
         text = self.root.ids.input_miles.text
         try:
             return float(text)
@@ -34,6 +35,7 @@ class MilesKilometersApp(App):
         self.root.ids.output_label.text = str(kilometers_result)
 
     def handle_increment(self, change):
+        """Add positive or negative increment to received miles."""
         miles_value = self.receive_miles() + change
         self.root.ids.input_miles.text = str(miles_value)
         self.handle_calculations()
