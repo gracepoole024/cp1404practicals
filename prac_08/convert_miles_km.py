@@ -17,10 +17,10 @@ class MilesKilometersApp(App):
         """Construct the app."""
         self.title = "Convert Miles to Kilometres"
         self.root = Builder.load_file('convert_miles_km.kv')
-        self.message = "Convert miles to kilometers"
+        self.message = "Kilometers Output"
         return self.root
 
-    def receive_miles(self):
+    def get_miles(self):
         """Receive miles from user and return float."""
         text = self.root.ids.input_miles.text
         try:
@@ -32,6 +32,7 @@ class MilesKilometersApp(App):
         """Handle changes to the text input by updating the model from the view."""
         miles_value = self.receive_miles()
         kilometers_result = miles_value * MILES_TO_KILOMETERS
+        self.message = self.root.ids.output_label.text
         self.root.ids.output_label.text = str(kilometers_result)
 
     def handle_increment(self, change):
@@ -41,5 +42,4 @@ class MilesKilometersApp(App):
         self.handle_calculations()
 
 
-# create and start the App running
 MilesKilometersApp().run()

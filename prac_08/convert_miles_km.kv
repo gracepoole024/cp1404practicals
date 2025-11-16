@@ -2,12 +2,14 @@ BoxLayout:
     orientation: 'vertical'
     BoxLayout:
         orientation: 'horizontal'
+        size_hint_y: 0.5
         TextInput:
+            size_hint_x: 0.6
             id: input_miles
-            on_text: app.handle_calculations()
+            on_text: app.get_miles()
         BoxLayout:
             orientation: 'vertical'
-            size_hint_x: 0.25
+            size_hint_x: 0.3
             Button:
                 text: "Up"
                 on_press: app.handle_increment(1)
@@ -16,9 +18,10 @@ BoxLayout:
                 on_press: app.handle_increment(-1)
     BoxLayout:
         orientation: 'vertical'
+        Button:
+            text: "Convert miles to kim"
+            on_press: app.handle_calculations()
         Label:
+            id:output_label
             text: app.message
-            background_color: (0.94, 0.81, 0.89, 1)
-        Label:
-            id: output_label
 
