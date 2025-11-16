@@ -3,7 +3,6 @@
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.lang import Builder
-from kivy.uix.button import Button
 
 
 class DynamicLabelsApp(App):
@@ -16,7 +15,7 @@ class DynamicLabelsApp(App):
         self.names = ["John", "Paul", "George", "Ringo"]
 
     def build(self):
-        """Build Kivy GUI"""
+        """Build Kivy GUI."""
         self.title = "Dynamic Labels"
         self.root = Builder.load_file('dynamic_labels.kv')
         self.create_widgets()

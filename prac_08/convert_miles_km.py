@@ -30,14 +30,14 @@ class MilesKilometersApp(App):
 
     def handle_calculations(self):
         """Handle changes to the text input by updating the model from the view."""
-        miles_value = self.receive_miles()
+        miles_value = self.get_miles()
         kilometers_result = miles_value * MILES_TO_KILOMETERS
         self.message = self.root.ids.output_label.text
         self.root.ids.output_label.text = str(kilometers_result)
 
     def handle_increment(self, change):
         """Add positive or negative increment to received miles."""
-        miles_value = self.receive_miles() + change
+        miles_value = self.get_miles() + change
         self.root.ids.input_miles.text = str(miles_value)
         self.handle_calculations()
 
