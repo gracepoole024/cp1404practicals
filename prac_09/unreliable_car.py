@@ -1,4 +1,4 @@
-"""CP1404 Prac 9 - UnreliableCar SubClass"""
+"""CP1404 Prac 9 - UnreliableCar SubClass."""
 import random
 
 from prac_09.car import Car
@@ -18,7 +18,7 @@ class UnreliableCar(Car):
 
     def drive(self, distance):
         """Generate random float to determine if car is safe to drive."""
-        random_float = random.random(0, 100)
+        random_float = random.randint(0, 100)
         if self.reliability > random_float:
             distance_driven = super().drive(distance)
         else:
