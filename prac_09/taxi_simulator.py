@@ -19,6 +19,13 @@ def main():
         if choice == "c":
             print("Taxis available:")
             display_taxis(taxis)
+            try:
+                taxi_choice = int(input("Choose taxi: "))
+                current_taxi = taxis[taxi_choice]
+            except ValueError:
+                print("Invalid taxi choice")
+            except IndexError:
+                print("Invalid taxi choice")
         elif choice == "d":
             if current_taxi:
                 current_taxi.start_fare()
@@ -39,3 +46,6 @@ def main():
 def display_taxis(taxis):
     for i, taxi in enumerate(taxis):
         print(f"{i} - {taxi}")
+
+
+main()
