@@ -1,6 +1,5 @@
 """CP1404 Prac 9 - Taxi Simulator"""
 
-from prac_06.car import Car
 from prac_09.taxi import Taxi
 from prac_09.silver_service_taxi import SilverServiceTaxi
 
@@ -8,6 +7,7 @@ MENU = """q)uit, c)hoose taxi, d)rive"""
 
 
 def main():
+    """Interactive program to use Taxi and SilverServiceTaxi classes."""
     total_fare = 0.0
     taxis = [Taxi("Prius", 100), SilverServiceTaxi("Limo", 100, 2),
              SilverServiceTaxi("Hummer", 200, 4)]
@@ -28,10 +28,7 @@ def main():
                 print("Invalid taxi choice")
         elif choice == "d":
             if current_taxi:
-                current_taxi.start_fare()
-                distance = float(input("Drive how far?"))
-                current_taxi.drive(distance)
-                cost = current_taxi.get_fare()
+                cost = drive_taxi(current_taxi)
                 print(f"Your {current_taxi.name} trip cost you ${cost}")
                 total_fare += cost
             else:
@@ -43,7 +40,16 @@ def main():
         choice = input(">>").lower()
 
 
+def drive_taxi(current_taxi):
+    current_taxi.start_fare()
+    distance = float(input("Drive how far?"))
+    current_taxi.drive(distance)
+    cost = current_taxi.get_fare()
+    return cost
+
+
 def display_taxis(taxis):
+    """Display taxis using an index."""
     for i, taxi in enumerate(taxis):
         print(f"{i} - {taxi}")
 
