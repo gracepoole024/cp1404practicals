@@ -20,3 +20,13 @@ def main():
             print("Taxis available:")
             for i, taxi in enumerate(taxis):
                 print(f"{i} - {taxi}")
+        elif choice == "d":
+            if current_taxi:
+                current_taxi.start_fare()
+                distance = float(input("Drive how far?"))
+                current_taxi.drive(distance)
+                cost = current_taxi.get_fare()
+                print(f"Your {current_taxi.name} trip cost you ${cost}")
+            else:
+                print("You need to choose a taxi before you can drive")
+
