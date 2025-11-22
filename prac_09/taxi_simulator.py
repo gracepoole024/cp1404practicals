@@ -28,7 +28,8 @@ def main():
                 print("Invalid taxi choice")
         elif choice == "d":
             if current_taxi:
-                cost = drive_taxi(current_taxi)
+                distance = float(input("Drive how far?"))
+                cost = drive_taxi(current_taxi, distance)
                 print(f"Your {current_taxi.name} trip cost you ${cost}")
                 total_fare += cost
             else:
@@ -40,9 +41,9 @@ def main():
         choice = input(">>").lower()
 
 
-def drive_taxi(current_taxi):
+def drive_taxi(current_taxi, distance):
+    """Calculate cost of fare depending on distance."""
     current_taxi.start_fare()
-    distance = float(input("Drive how far?"))
     current_taxi.drive(distance)
     cost = current_taxi.get_fare()
     return cost
