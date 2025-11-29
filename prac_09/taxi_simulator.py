@@ -1,0 +1,62 @@
+"""CP1404 Prac 9 - Taxi Simulator"""
+
+from prac_09.taxi import Taxi
+from prac_09.silver_service_taxi import SilverServiceTaxi
+
+MENU = """q)uit, c)hoose taxi, d)rive"""
+
+
+def main():
+    """Interactive program to use Taxi and SilverServiceTaxi classes."""
+    total_fare = 0.0
+    taxis = [Taxi("Prius", 100), SilverServiceTaxi("Limo", 100, 2),
+             SilverServiceTaxi("Hummer", 200, 4)]
+    current_taxi = None
+    print("Let's drive!")
+    print(MENU)
+    choice = input(">>").lower()
+    while choice != "q":
+        if choice == "c":
+            print("Taxis available:")
+            display_taxis(taxis)
+            try:
+                taxi_choice = int(input("Choose taxi: "))
+                current_taxi = taxis[taxi_choice]
+            except ValueError:
+                print("Invalid taxi choice")
+            except IndexError:
+                print("Invalid taxi choice")
+        elif choice == "d":
+            if current_taxi:
+                distance = float(input("Drive how far?"))
+                cost = drive_taxi(current_taxi, distance)
+                print(f"Your {current_taxi.name} trip cost you ${cost}")
+                total_fare += cost
+            else:
+                print("You need to choose a taxi before you can drive")
+        else:
+            print("Invalid menu choice")
+        print(f"Bill to date: ${total_fare:.2f}")
+        print(MENU)
+        choice = input(">>").lower()
+
+    print(f"Total trip cost: ${total_fare:.2f}")
+    print("Taxis are now:")
+    display_taxis(taxis)
+
+
+def drive_taxi(current_taxi, distance):
+    """Calculate cost of fare depending on distance."""
+    current_taxi.start_fare()
+    current_taxi.drive(distance)
+    cost = current_taxi.get_fare()
+    return cost
+
+
+def display_taxis(taxis):
+    """Display taxis using an index."""
+    for i, taxi in enumerate(taxis):
+        print(f"{i} - {taxi}")
+
+
+main()
